@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 public class Reloj {
     private float horaAlarma;
     private float minutoAlarma;
-
+    private String hora;
 
     public void calcularHora(){
         Calendar horaActual = Calendar.getInstance();
@@ -22,5 +22,9 @@ public class Reloj {
 
         JOptionPane.showMessageDialog(null, "La activacion de ");
         System.out.println("La alarma se activará en aproximadamente " + diferenciaMinutos + " minutos.");
+    }
+    public String condH(){
+        hora="";
+        return hora;
     }
 }

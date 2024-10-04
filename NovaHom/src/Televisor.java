@@ -1,11 +1,14 @@
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-public class Televisor{
+public class Televisor extends Dispositivos{
     
-    public float programacion_Televisor(){
-        float tv = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la hora de inicio del televisor:\nHora recomendada [HH:MM]"));
-        return tv;
+    Televisor(List<String> habitacion, Map<String,ArrayList<String>> CondAct,String tipoApodo){
+        super(habitacion, CondAct,tipoApodo);
     }
-
+    public void activar(){
+        System.out.println("Se apaga/prende el televisor");
+    }
 
 }

@@ -8,10 +8,12 @@ import javax.swing.JOptionPane;
 
 public class house {
     public static void main(String[] args) {
-        List<String> habitacion=new ArrayList<>();//Lista de hbitaciones
-        Map<String, ArrayList<String>> CondAct=new HashMap<>();//Cond:Elementos a act
-        List<String> dispositivos=Arrays.asList("Televisor");//Lista de dispositivos creables
-        configuracion cng=new configuracion();//Organizar el main
+        List<String> habitacion=new ArrayList<>();
+        habitacion.add("Recamara"/*Valore default totalmente alterables. NO inicializada con .asList ya que esta no se puede redimensionar*/);//Lista de habitaciones
+        List<String> sensoresCon=Arrays.asList("Temperatura","Movimiento","Humedad"/*Agregar todos los que se quieran usar, hora no va aqui */);//Lista de sensores vinculables
+        Map<String, ArrayList<String>> CondAct=new HashMap<>();//Cond:Elementos a activar con esa cond
+        List<String> dispositivos=Arrays.asList("Televisor"/*Agregar el nombre de cada clase hija de disp..*/);//Lista de dispositivos creables
+        configuracion cng=new configuracion();//Organizar el main varios metodos 
         int opcion;
         Menu inicio= new Menu();
         List<String> menI=Arrays.asList("Ingrese una opción:","1) Listar dispositivos","2) Agregar dispositivo","3) Buscar dispositivo","4) Salir");
@@ -27,9 +29,7 @@ public class house {
                     break;
 
                 case 2:
-                    cng.crear(habitacion, CondAct, dispositivos);
-                    System.out.println(habitacion);
-                    System.out.println(CondAct);
+                    cng.crear(habitacion, CondAct, dispositivos,sensoresCon);
                     break;
                 case 3:
                     

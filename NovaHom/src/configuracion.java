@@ -18,6 +18,8 @@ public class configuracion {
     private Menu cond= new Menu();
     private List<String> menC=Arrays.asList("Por hora","Señal de un sensor");
 
+
+    
     private int opcCond;
     
     configuracion(){

@@ -1,89 +1,66 @@
-import java.util.Map;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.swing.JOptionPane;
+import java.util.List;
+import java.util.Map;
 
 public class Dispositivos{
     //Variables
-    private Menu cond= new Menu();
-    private List<String> menC=Arrays.asList("Por hora","Señal de un sensor");
-    //private int NmenC=menC.size();
-    private int opcCond;
+    private configuracion cng= new configuracion();
     private Menu menInitDis=new Menu();
-    private List<String> menIn=new ArrayList<>();
+    private List<String> menIn=new ArrayList<>();//Creado porque CondAct.getKey() devuelve un set<String>(no se que es eso) y los met. de menu reciben List BORRAR ANTES DE LA ENTREGA
     private String opc;
     protected String habitacion;//Del dispositivo
-    protected SenalDAct sig=new SenalDAct();//Condiciones de activación del dispositivo
+    protected List<String> sig=new ArrayList<>();//Condiciones de activación del dispositivo
     protected String newHab,newCond;
-    protected String tipoApodo;//Identificadores del dispositivo {TipoDClaseHija,ApodoIdentificadorDelUsuario}
+    protected String tipoApodo;//Identificadores del dispositivo {ApodoIdentificadorDelUsuario (TipoDClaseHija)}
 
     //Constructores
-    Dispositivos(List<String> habitacion, Map<String,ArrayList<String>> CondAct,String tipoApodo){
+    Dispositivos(List<String> habitacion, Map<String,ArrayList<String>> CondAct,String tipoApodo,List<String> sensoresCon){
         this.tipoApodo=tipoApodo;
-        InitDis(habitacion,CondAct);
+        InitDis(habitacion,CondAct,sensoresCon);
     }
 
-
-    public void AddCond(Map<String,ArrayList<String>> CondAct) {
+    //Metodos
+    public void initCon(Map<String,ArrayList<String>> CondAct,List<String> sensoresCon) {
         //Permite al usuario seleccionar la condición de activación del dispositivo entre las existentes o crear una
-        Reloj reloj=new Reloj();
         menIn.clear();
         menIn.addAll(CondAct.keySet());menIn.add("Otro");
         opc=menInitDis.selec(menIn,"Seleccione una condicion");
-        //Ya existe y no esta establecida para ese dispositivo
-        if(opc=="")
+        //No seleciono nada
+        if(opc==" ")
             return;
-        if(opc!="Otro" && !sig.getSennal().contains(opc)){
-            sig.setSennal(opc);
+        //Ya existe y no esta establecida para ese dispositivo
+            if(opc!="Otro" && !sig.contains(opc)){
+            sig.add(opc);
             CondAct.get(opc).add(tipoApodo);
-            
-        }else{
-            opcCond=cond.selec(menC,"Tipo de Condición",1);
-            switch (opcCond) {
-                case 0:
-                    return;
-                case 1:
-                    newCond=reloj.condH();
-                    break;
-                case 2:
-                    newCond=(String)JOptionPane.showInputDialog(null, "Nombra la condición","Nueva condición",1);
-                    break;
-                case 3:
-                    return;
-                default:
-                    break;
-            }
-            if(!menIn.contains(newCond) || !sig.getSennal().contains(newCond)){
-                //null tipo
-                sig.setSennal(newCond);    
-                System.out.println(sig.getSennal().get(sig.getSennal().size()-1));
-                if(CondAct.isEmpty())
-                    CondAct.put(sig.getSennal().get(sig.getSennal().size()-1),new ArrayList<String>());
-                
-                CondAct.get(newCond).add(tipoApodo);
-                System.out.println(CondAct);
-                System.out.println(tipoApodo);
-            }
-        }
+        }else//No existe
+            newCond=cng.AddCond(CondAct, sensoresCon,sig,tipoApodo);
+            //si dio cancelar dentro del AddCond 
+            if(newCond=="\n")
+                return;
+            sig.add(newCond);
     }
-    public void moverhab(List<String> habitacion){
+    public void initH(List<String> habitacion){
         //Permite al usuario seleccionar la habitación en la que se encuentra el dispositivo
+        menIn.clear();
         menIn.addAll(habitacion); menIn.add("Otro");
         opc=menInitDis.selec(menIn,"Seleccione una habitación");
-        if(opc=="")
+        //Dio cancelar
+        if(opc==" ")
             return;
-        if(opc=="Otro"){
-            newHab=(String)JOptionPane.showInputDialog(null, "Nombra la habitación","Nueva habitación",1);
-            if(!menIn.contains(newHab))
-                habitacion.add(newHab);
-            this.habitacion=newHab;
-        }else
+        //Crea una habitación nueva
+        if(opc=="Otro")
+            this.habitacion=cng.crearHab(habitacion);
+        else
+            //La habitación ya existia
             this.habitacion=opc;
     }
-    public void InitDis(List<String> habitacion, Map<String,ArrayList<String>> CondAct){
-        moverhab(habitacion);
-        AddCond(CondAct);
+    public void InitDis(List<String> habitacion, Map<String,ArrayList<String>> CondAct,List<String> sensoresCon){
+        initH(habitacion);
+        initCon(CondAct,sensoresCon);
     }
+    
+    public String getTipoApodo(){
+        return tipoApodo;
+    }
+
 }

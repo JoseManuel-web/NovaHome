@@ -28,3 +28,6 @@ public class Reloj {
         return hora;
     }
 }
+/*
+ * Debe permitir seleccionar una hora de activacion  HH:MM->int HHMM y devolver de la forma "Hora HHMM"
+ */

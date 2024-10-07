@@ -17,12 +17,12 @@ public class Menu {
     }
     
     public String selec(List<String>menu,String title){
-        String selection = (String)JOptionPane.showInputDialog(null,"Elija una opción",
+        Object selection =JOptionPane.showInputDialog(null,"Elija una opción",
     title,JOptionPane.QUESTION_MESSAGE,null,menu.toArray(),null);
         //si se cierra la ventan o le da cancel el objecto selection es nulo por tanto verificar eso
         if(Objects.isNull(selection))
-            return "";
-        return selection;
+            return " ";
+        return (String)selection;
     }
 
     public int selec(List<String>menu,String title,int i){

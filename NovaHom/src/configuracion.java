@@ -15,20 +15,12 @@ public class configuracion {
     private Menu menu=new Menu();
     private int opc;
     private String apodo;
-    //private StringBuilder sb = new StringBuilder();
-    private ArrayList<Televisor> teles=new ArrayList<>(0);
-    private ArrayList<Microondas> microondas = new ArrayList<>(0);
-    private ArrayList<Luces> luces = new ArrayList<>(0);
-    @SuppressWarnings("unchecked")
-    private ArrayList<Dispositivos>[] dis= new ArrayList[3];
+    private ArrayList<Dispositivos> dis;
     private Menu cond= new Menu();
     private List<String> menC=Arrays.asList("Por hora","Señal de un sensor");
     private int opcCond;
     
     configuracion(){
-        dis[0]=new ArrayList<>(teles);
-        dis[1]=new ArrayList<>(microondas);
-        dis[2]=new ArrayList<>(luces);
         habitacion.add("Recamara"/*Valore default totalmente alterables. NO inicializada con .asList ya que esta no se puede redimensionar*/);//Lista de habitaciones
     }
 
@@ -39,15 +31,15 @@ public class configuracion {
         switch (opc) {
             case 1:
                 apodo+=" (Televisor)";
-                dis[0].addLast(new Televisor(habitacion, CondAct, apodo, sensoresCon));
+                dis.addLast(new Dispositivos(habitacion, CondAct, apodo, sensoresCon));
             
             case 2:
                 apodo += " (Microondas)";
-                microondas.add(new Microondas(habitacion, CondAct, apodo, sensoresCon));
+                dis.add(new Dispositivos(habitacion, CondAct, apodo, sensoresCon));
             
             case 3:
                 apodo += " (Luces)";
-                luces.add (new Luces(habitacion,CondAct,apodo, sensoresCon));
+                dis.add (new Dispositivos(habitacion,CondAct,apodo, sensoresCon));
         }
     }
 
@@ -69,7 +61,7 @@ public class configuracion {
                 case 0:
                     newCond="\n";
                 case 1:
-                    newCond=reloj.condH();
+                    newCond="Reloj "+reloj.condH();
                     break;
                 case 2:
                     newCond=s.newSen(sensoresCon);
@@ -102,20 +94,16 @@ public class configuracion {
         String sb ="\tDispositivos en la casa:\n";
         switch (k) {
             case 1:
-            for(ArrayList<Dispositivos> i:dis){
-                for(Dispositivos j: i){
-                    if(j.getHabitacion()==opc)
-                        sb+=j.toString();
+            for(Dispositivos i:dis){
+                if(i.getHabitacion()==opc)
+                    sb+=i.toString();
                 }
-            }
                 break;
                 case 2:
-                for(ArrayList<Dispositivos> i:dis){
-                    for(Dispositivos j: i){
-                        if(j.getTipo()==opc)
-                        sb+=j.toString();
+                for(Dispositivos i:dis){
+                    if(i.getTipo()==opc)
+                        sb+=i.toString();
                     }
-                }
                     break;
         }
         JOptionPane.showMessageDialog(null, sb);
@@ -128,15 +116,19 @@ public class configuracion {
         JOptionPane.showMessageDialog(null, sb,"Listado por condición",0);
     }
 
-    public void buscarDispositivos(String apodo){
-        for(ArrayList<Dispositivos> i:dis){
-            for(Dispositivos j: i){
-                if(j.getTipoApodo().split(" ")[0]==apodo){
-                    JOptionPane.showMessageDialog(null, j.toString(),"Resultado de la busqueda",1);
-                    return;
+    public void buscarDispositivos(){
+        String apodo = JOptionPane.showInputDialog(
+        null, 
+        "Ingrese el nombre del dispostivo a buscar",
+        "Busqueda de dispositivos",
+        JOptionPane.QUESTION_MESSAGE
+        );
+        for(Dispositivos i:dis){
+            if(i.getTipoApodo().split(" ")[0]==apodo){
+                 JOptionPane.showMessageDialog(null, i.toString(),"Resultado de la busqueda",1);
+                return;
                 }
             }
-        }
         JOptionPane.showMessageDialog(null, "No existe dispositivo con ese nombre","Resultado de la busqueda",1);
     }   
 }

@@ -13,7 +13,6 @@ public class Dispositivos{
     private String newCond;
     private String tipoApodo;//Identificadores del dispositivo {ApodoIdentificadorDelUsuario (TipoDClaseHija)}
     private boolean estado;
-    private String tipo;
 
     //Constructores
     Dispositivos(List<String> habitacion, Map<String,ArrayList<Dispositivos>> CondAct,String tipoApodo,List<String> sensoresCon){
@@ -21,7 +20,11 @@ public class Dispositivos{
         InitDis(habitacion,CondAct,sensoresCon);
     }
 
-    //Metodos
+    //Metodos principales
+    public void InitDis(List<String> habitacion, Map<String,ArrayList<Dispositivos>> CondAct,List<String> sensoresCon){
+        initH(habitacion);
+        initCon(CondAct,sensoresCon);
+    }
     public void initCon(Map<String,ArrayList<Dispositivos>> CondAct,List<String> sensoresCon) {
         //Permite al usuario seleccionar la condición de activación del dispositivo entre las existentes o crear una
         menIn.clear();
@@ -56,11 +59,9 @@ public class Dispositivos{
             //La habitación ya existia
             this.habitacion=opc;
     }
-    public void InitDis(List<String> habitacion, Map<String,ArrayList<Dispositivos>> CondAct,List<String> sensoresCon){
-        initH(habitacion);
-        initCon(CondAct,sensoresCon);
-    }
     
+
+    //Metodos complementarios
     public String getTipoApodo(){
         return tipoApodo;
     }
@@ -68,6 +69,8 @@ public class Dispositivos{
         return habitacion;
     }
     public String getTipo(){
+        String tipo=tipoApodo.split(" ")[1];
+        tipo=tipo.substring(1, tipo.indexOf(")"));
         return tipo;
     }
     public String toString() {

@@ -7,9 +7,11 @@ public class house {
         configuracion cng=new configuracion();//Organizar el main varios metodos 
         int opcion;
         Menu inicio= new Menu();
-        List<String> menI=Arrays.asList("Ingrese una opción:\n","1) Listar dispositivos\n","2) Agregar dispositivo\n","3) Buscar dispositivo\n","4) Salir\n");
+        List<String> menI=Arrays.asList("Ingrese una opción:\n","1) Listar dispositivos\n",
+        "2) Agregar dispositivo\n","3) Buscar dispositivo\n","4) Salir\n");
         int NmenI=menI.size();
-        JOptionPane.showMessageDialog(null, "Bienvenid@ al gestor de una casa inteligente!","Saludo",1);
+        JOptionPane.showMessageDialog(null, "Bienvenid@ al gestor de una casa inteligente!",
+        "Saludo",1);
         do { 
             opcion=inicio.mostrar(menI.toString(), NmenI-1,"Inicio");
             switch (opcion) {
@@ -18,7 +20,6 @@ public class house {
                 case 1:
                     //Caso listar
                     cng.listar();
-                    
                     break;
 
                 case 2:
@@ -26,20 +27,14 @@ public class house {
                     break;
                 case 3:
                     //Buscar dispositivos
-                    String nombreDisp = JOptionPane.showInputDialog(
-                        null, 
-                        "Ingrese el apodo del dispostivo a buscar",
-                        "Busqueda de dispositivos",
-                        JOptionPane.QUESTION_MESSAGE
-                        );
-                    cng.buscarDispositivos(nombreDisp);
+                    cng.buscarDispositivos();
                     break;
                 case 4:
-                    Object[] nombreIngregrantes = {
-                        "JOSE MANUEL CALDERON SANDOVAL",
-                        "LUIS ALEJANDRO EMBA REYES",
-                        "GUSTAVO LOPEZ LUNA",
-                        "GUSTAVO FABIAL OLALDE"
+                    String[] nombreIngregrantes = {
+                        "JOSE MANUEL CALDERON SANDOVAL\n",
+                        "LUIS ALEJANDRO EMBA REYES\n",
+                        "GUSTAVO LOPEZ LUNA\n",
+                        "GUSTAVO FABIAL OLALDE\n"
                     };
                     JOptionPane.showMessageDialog(
                         null, 

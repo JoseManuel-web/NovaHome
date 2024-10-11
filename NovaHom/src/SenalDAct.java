@@ -35,10 +35,5 @@ public class SenalDAct{
         return m.selec(sensoresCon, "selecciona un sensor")+" "+Integer.parseInt(JOptionPane.showInputDialog(null, "Condición;"));
         
     }
-    //activa el dispositivo
-    public boolean activar(String senal,int act){
-        if(separCond(senal).getcondSen()==act)
-            return true;
-        return false;
-    }
+    
 }

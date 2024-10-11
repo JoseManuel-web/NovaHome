@@ -3,11 +3,11 @@ import javax.swing.JOptionPane;
 public class Reloj {
     private int hora;
 
-    public String condH(){
+    public SenalDAct condH(){
         String horaAperturaStr = JOptionPane.showInputDialog("Introduce la hora de apertura (formato 24h, ej. 08:00):");
         String[] partes = horaAperturaStr.split(":");
         hora=Integer.parseInt(partes[0])*1000+ Integer.parseInt(partes[1]);
-        return "Hora "+partes;
+        return new SenalDAct().separCond("Hora "+partes);
     }
     public boolean activar(String senal,int act){
         if(senal!="Hora")

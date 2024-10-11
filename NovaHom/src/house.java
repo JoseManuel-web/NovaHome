@@ -1,5 +1,3 @@
-import java.util.Arrays;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 public class house {
@@ -7,13 +5,13 @@ public class house {
         configuracion cng=new configuracion();//Organizar el main varios metodos 
         int opcion;
         Menu inicio= new Menu();
-        List<String> menI=Arrays.asList("Ingrese una opción:\n","1) Listar dispositivos\n",
-        "2) Agregar dispositivo\n","3) Buscar dispositivo\n","4) Salir\n");
-        int NmenI=menI.size();
+        String[] menI={"Ingrese una opción:","1) Listar dispositivos",
+        "2) Agregar dispositivo","3) Buscar dispositivo","4) Salir"};
+        int NmenI=menI.length;
         JOptionPane.showMessageDialog(null, "Bienvenid@ al gestor de una casa inteligente!",
         "Saludo",1);
         do { 
-            opcion=inicio.mostrar(menI.toString(), NmenI-1,"Inicio");
+            opcion=inicio.mostrar(menI, NmenI-1,"Inicio");
             switch (opcion) {
                 case 0:
                     return;
@@ -26,7 +24,7 @@ public class house {
                     cng.crear();
                     break;
                 case 3:
-                    //Buscar dispositivos
+                    //Buscar dispositivos para revisar o modificar
                     cng.buscarDispositivos();
                     break;
                 case 4:
@@ -49,4 +47,10 @@ public class house {
             }
         } while (opcion !=4 );
     }
+    /*Randoms que usando lCond[i].setCondSen==rand
+     * if(true)
+     * for(Dispositivos i:CondAct(lCond[1]))
+     *      i.activar();
+     * 
+     */
 }

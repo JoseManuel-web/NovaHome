@@ -5,14 +5,14 @@ import javax.swing.JOptionPane;
 public class Menu {
     private int k;
 
-    public int mostrar(List<String> menu, int i,String title){
+    public int mostrar(/*List<*/String/*>*/ menu, int i,String title){
         do{
-            String menuMos="";
+            /*String menuMos="";
             for (int j = 0; j < i-1; j++) {
                 menuMos += menu.get(j)+" \n";
-            }
-            k= Integer.parseInt(JOptionPane.showInputDialog(null,menuMos,title,1));
-        }while(k<1 || k>i-2);
+            }*/
+            k= Integer.parseInt(JOptionPane.showInputDialog(null,menu/*Mos*/,title,1));
+        }while(k<1 || k>i-1);
         return k;
     }
     

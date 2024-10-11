@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class Microondas extends Dispositivos {
     
-    public Microondas(List<String> habitacion, Map<String, ArrayList<String>> CondAct, String tipoApodo, List<String> sensoresCon) {
+    public Microondas(List<String> habitacion, Map<String, ArrayList<Dispositivos>> CondAct, String tipoApodo, List<String> sensoresCon) {
         super(habitacion, CondAct, tipoApodo, sensoresCon);
     }
 

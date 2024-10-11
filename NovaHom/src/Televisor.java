@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class Televisor extends Dispositivos{
     
-    Televisor(List<String> habitacion, Map<String,ArrayList<String>> CondAct,String tipoApodo,List<String> sensoresCon){
+    Televisor(List<String> habitacion, Map<String,ArrayList<Dispositivos>> CondAct,String tipoApodo,List<String> sensoresCon){
         super(habitacion, CondAct,tipoApodo,sensoresCon);
     }
     public void activar(){

@@ -17,8 +17,8 @@ public class SenalDAct{
         return condSen;
     }
     //Manipular SenalDAct como String
-    public String unionCond(SenalDAct a){
-        return a.getSensor()+a.getcondSen();
+    public String toString(){
+        return sensor+" "+condSen;
     }
     //Manipular un String como SenalDAct
     public SenalDAct separCond(String union){

@@ -15,7 +15,7 @@ public class configuracion {
     private Menu menu=new Menu();
     private int opc;
     private String apodo;
-    private ArrayList<Dispositivos> dis;
+    private ArrayList<Dispositivos> dis=new ArrayList<>();
     
     configuracion(){
         habitacion.add("Recamara"/*Valore default totalmente alterables. NO inicializada con .asList ya que esta no se puede redimensionar*/);//Lista de habitaciones
@@ -25,25 +25,25 @@ public class configuracion {
 
     public void crear(){
         opc=menu.selec(dispositivos, "Dispositivo a crear",1);
-        if(opc==0)
         apodo=(String)JOptionPane.showInputDialog(null, "Nombra el dispositivo","Nuevo dispositivo",1);
         switch (opc) {
             case 1:
                 apodo+=" (Televisor)";
                 dis.addLast(new Dispositivos(habitacion, CondAct, apodo, sensoresCon,lCond));
-            
+                break;
             case 2:
                 apodo += " (Microondas)";
                 dis.add(new Dispositivos(habitacion, CondAct, apodo, sensoresCon, lCond));
-            
+                break;
             case 3:
                 apodo += " (Luces)";
                 dis.add (new Dispositivos(habitacion,CondAct,apodo, sensoresCon, lCond));
+                break;
         }
-    }
-
-    public void AddCond(List<String> sig,String apodo,Dispositivos disp){
-        
+        //System.out.println(habitacion);
+        //System.out.println(CondAct);
+        //System.out.println(lCond);
+        //System.out.println(dis);
     }
 
     public void listar(){

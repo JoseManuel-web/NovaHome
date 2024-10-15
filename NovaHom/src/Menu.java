@@ -21,6 +21,8 @@ public class Menu {
         return (String)selection;
     }
 
+    
+
     public int selec(List<String>menu,String title,int i){
         Object selection = JOptionPane.showInputDialog(null,"Elija una opción",
     title,JOptionPane.QUESTION_MESSAGE,null,menu.toArray(),null);

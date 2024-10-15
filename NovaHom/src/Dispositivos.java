@@ -42,7 +42,7 @@ public class Dispositivos{
         //Ya existe y no esta establecida para ese dispositivo
         if(opc!="Otro" && !sig.contains(opc)){
             sig.add(opc);
-            SenalDAct s=new SenalDAct().separCond(opc);
+            s.separCond(opc);
             CondAct.get(s).add(this);
         }else//No existe
             opcCond=menInitDis.selec(menC,"Tipo de Condición",1);
@@ -58,15 +58,18 @@ public class Dispositivos{
                 default:
                     break;
                 }
-            //Si la newCond no esta en CondAct o no esta en sig crea el elemento en el map CondAct
+            //Si la newCond no esta en CondAct o no esta en lCond crea el elemento en el map CondAct
             if(!sig.contains(newCond)){
                 sig.add(newCond);
-                SenalDAct nSDA=new SenalDAct().separCond(newCond);
-                if(!lCond.contains(newCond))
-                    CondAct.put(nSDA,new ArrayList<Dispositivos>());
-                CondAct.get(nSDA).add(this);
+                s.separCond(newCond);
+                if(!lCond.contains(newCond)){
+                    lCond.add(newCond);
+                    CondAct.put(s,new ArrayList<Dispositivos>());
+                }
+                CondAct.get(s).add(this);
             }
             //si dio cancelar dentro del AddCond 
+            System.out.println(CondAct.get(s));
     }
     public void initH(List<String> habitacion){
         //Permite al usuario seleccionar la habitación en la que se encuentra el dispositivo
